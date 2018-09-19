@@ -1,0 +1,4 @@
+echo
+
+go get github.com/BurntSushi/toml
+toml

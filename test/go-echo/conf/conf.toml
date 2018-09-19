@@ -1,0 +1,5 @@
+[app]
+name = "REDSTOP Load Test Server"
+
+[static]
+type = "DEFAULT" #default is normal static

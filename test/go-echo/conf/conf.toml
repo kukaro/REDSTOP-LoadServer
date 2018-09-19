@@ -3,3 +3,9 @@ name = "REDSTOP Load Test Server"
 
 [static]
 type = "DEFAULT" #default is normal static
+
+[server]
+addr = ":1323"
+domain_api = "api.localhost:1323"
+domain_web = "www.localhost:1323"
+domain_web_socket = "ws.localhost:1323"

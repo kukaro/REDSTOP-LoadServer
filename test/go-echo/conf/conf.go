@@ -21,6 +21,7 @@ type config struct {
 	App      app
 	Database database
 	Static   static
+	Server   server
 }
 
 type app struct {
@@ -29,6 +30,13 @@ type app struct {
 
 type static struct {
 	Type string `toml:"type"`
+}
+
+type server struct {
+	Addr         string `toml:"addr"`
+	DomainApi    string `toml:"domain_api"`
+	DomainWeb    string `toml:"domain_web"`
+	DomainWebSocket string `toml:"domain_web_socket"`
 }
 
 type database struct {

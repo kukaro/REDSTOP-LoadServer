@@ -1,7 +1,8 @@
-package route
+package api
 
 import (
-	"../conf"
+	"../../conf"
+	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
 	"strings"
@@ -14,20 +15,22 @@ type User struct {
 	IsOwner bool   `json:"is-owner"`
 }
 
-func Init() *echo.Echo {
-	e := echo.New()
+func Routers() *echo.Echo {
+	fmt.Println("api 왔다.")
+	e:= echo.New()
 
+	// set static
 	switch conf.Conf.Static.Type {
 	case conf.BINDATA:
 		/*pass*/
 	default:
 		e.Static("/assets","./assets")
 	}
-	
-	v1 := e.Group("/api/v1")
+
+	v1 := e.Group("/v1")
 	{
-		v1.GET("/", getRoot)
-		v1.POST("/user", postUser)
+		v1.GET("/",getRoot)
+		v1.POST("/user/:id",postUser)
 	}
 	return e
 }
@@ -37,9 +40,9 @@ func getRoot(c echo.Context) error {
 }
 
 func postUser(c echo.Context) error {
-	id := c.QueryParam("id")
+	id := c.FormValue("id")
 	var user User
-	if strings.Compare(id, "jiharu") == 0 {
+	if (strings.Compare(id, "jiharu") == 0) {
 		user = User{"jiharu", 26, "male", true}
 	} else {
 		user = User{id, 22, "female", false}

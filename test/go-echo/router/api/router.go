@@ -2,7 +2,6 @@ package api
 
 import (
 	"../../conf"
-	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
 	"strings"
@@ -16,7 +15,6 @@ type User struct {
 }
 
 func Routers() *echo.Echo {
-	fmt.Println("api 왔다.")
 	e:= echo.New()
 
 	// set static
@@ -27,7 +25,7 @@ func Routers() *echo.Echo {
 		e.Static("/assets","./assets")
 	}
 
-	v1 := e.Group("/v1")
+	v1 := e.Group("/api/v1")
 	{
 		v1.GET("/",getRoot)
 		v1.POST("/user/:id",postUser)

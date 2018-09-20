@@ -1,11 +1,12 @@
 [app]
 name = "REDSTOP Load Test Server"
+owner = "KTJ, CYJ, AJH"
 
 [static]
 type = "DEFAULT" #default is normal static
 
 [server]
 addr = ":1323"
-domain_api = "api.localhost:1323"
-domain_web = "www.localhost:1323"
-domain_web_socket = "ws.localhost:1323"
+domain_web = "localhost:1323/"
+domain_api = "localhost:1323/api"
+domain_web_socket = "localhost:1323/ws"

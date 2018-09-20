@@ -25,7 +25,8 @@ type config struct {
 }
 
 type app struct {
-	Name string `toml:"name"`
+	Name  string `toml:"name"`
+	Owner string `toml:"owner"`
 }
 
 type static struct {
@@ -33,9 +34,9 @@ type static struct {
 }
 
 type server struct {
-	Addr         string `toml:"addr"`
-	DomainApi    string `toml:"domain_api"`
-	DomainWeb    string `toml:"domain_web"`
+	Addr            string `toml:"addr"`
+	DomainApi       string `toml:"domain_api"`
+	DomainWeb       string `toml:"domain_web"`
 	DomainWebSocket string `toml:"domain_web_socket"`
 }
 

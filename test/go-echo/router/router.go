@@ -3,9 +3,10 @@ package router
 import (
 	"../conf"
 	"../router/api"
-	//"../router/web"
-	//"../router/web"
+	"../router/web"
 	"fmt"
+	"strings"
+
 	"github.com/labstack/echo"
 )
 
@@ -19,7 +20,7 @@ func InitRoutes() map[string]*Host {
 	hosts := make(map[string]*Host)
 
 	hosts[conf.Conf.Server.DomainApi] = &Host{api.Routers()}
-	//hosts[conf.Conf.Server.DomainWeb] = &Host{web.Routers()}
+	hosts[conf.Conf.Server.DomainWeb] = &Host{web.Routers()}
 	//hosts[conf.Conf.Server.DomainWebSocket] = &Host{api.Routers()}
 	return hosts
 }
@@ -31,16 +32,12 @@ func RunSubDomains() {
 		req := c.Request()
 		res := c.Response()
 
-		//u, _ := url.Parse(c.Scheme() + "://" + req.Host)
-		if host := hosts[req.Host]; host == nil {
-			//fmt.Println("req.Host : " + req.Host)
-			//fmt.Println("req.RequestURI : " + req.RequestURI)
+		firstUri := strings.Split(req.RequestURI, "/")[1]
+		fmt.Print(req.Host + "/" + firstUri)
+		if host := hosts[req.Host+"/"+firstUri]; host == nil {
 			/*error state*/
 			err = echo.ErrNotFound
 		} else {
-			fmt.Println("req.Host : " + req.Host)
-			fmt.Println("req.RequestURI : " + req.RequestURI)
-			fmt.Println(host)
 			host.Echo.ServeHTTP(res, req)
 		}
 		return

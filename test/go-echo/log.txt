@@ -1,3 +1,4 @@
+go get -u github.com/labstack/echo/...
 echo
 
 go get github.com/BurntSushi/toml

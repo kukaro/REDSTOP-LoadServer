@@ -1,1 +1,6 @@
+#jetbrain ide
 .idea
+
+#nodejs express
+node_modules
+package-lock.json

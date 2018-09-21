@@ -2,6 +2,7 @@ package api
 
 import (
 	"../../conf"
+	"../../controller"
 	"github.com/labstack/echo"
 	"net/http"
 	"strings"
@@ -15,20 +16,22 @@ type User struct {
 }
 
 func Routers() *echo.Echo {
-	e:= echo.New()
+	e := echo.New()
 
 	// set static
 	switch conf.Conf.Static.Type {
 	case conf.BINDATA:
 		/*pass*/
 	default:
-		e.Static("/assets","./assets")
+		e.Static("/assets", "./assets")
 	}
 
 	v1 := e.Group("/api/v1")
 	{
-		v1.GET("/",getRoot)
-		v1.POST("/user/:id",postUser)
+		v1.GET("/", getRoot)
+		v1.POST("/user/:id", postUser)
+		//v1.GET("/api/json-test/single-test/:count", controller.ApiTestHandler)
+		v1.GET("/api/json-test/single-test/:count", controller.ApiTestOriginHandler)
 	}
 	return e
 }

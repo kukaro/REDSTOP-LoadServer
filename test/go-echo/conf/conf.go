@@ -22,6 +22,7 @@ type config struct {
 	Database database
 	Static   static
 	Server   server
+	TestServer testServer
 }
 
 type app struct {
@@ -46,6 +47,10 @@ type database struct {
 	Password string
 	Host     string
 	Port     string
+}
+
+type testServer struct {
+	TestDomain string `toml:"test_domain"`
 }
 
 func Init(configFile string) error {

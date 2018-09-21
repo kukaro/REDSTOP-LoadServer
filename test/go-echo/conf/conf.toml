@@ -10,3 +10,6 @@ addr = ":1323"
 domain_web = "localhost:1323/"
 domain_api = "localhost:1323/api"
 domain_web_socket = "localhost:1323/ws"
+
+[testServer]
+test_domain = "http://localhost:3000/"

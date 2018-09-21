@@ -41,7 +41,7 @@ func ApiTestOriginHandler(c echo.Context) error {
 	}
 	for i := 0; i < cnt; i++ {
 		<-isComplete
-		fmt.Printf("goroutin : %d번째 호출\n", i);
+		//fmt.Printf("goroutin : %d번째 호출\n", i);
 	}
 	end := time.Now().UnixNano()
 	fmt.Println(end)

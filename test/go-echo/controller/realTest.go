@@ -42,7 +42,7 @@ func RealTest(c echo.Context) error {
 		statusCode <- resp.StatusCode
 	}()
 
-	apiRealTestData := ApiRealTestData{rurl, rtype, method, <-body, <-header, <-statusCode}
+	apiRealTestData := ApiRealTestData{method, rtype, rurl, <-body, <-header, <-statusCode}
 	jsonData, _ := json.Marshal(apiRealTestData)
 
 	fmt.Println(string(jsonData))

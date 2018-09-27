@@ -33,6 +33,11 @@ func Routers() *echo.Echo {
 		//v1.GET("/api/json-test/single-test/:count", controller.ApiTestHandler)
 		v1.GET("/api/json-test/single-test/:count", controller.ApiTestOriginHandler)
 	}
+
+	api := v1.Group("/api")
+	{
+		api.GET("/real-test/:method/:rtype/:rurl", controller.RealTest)
+	}
 	return e
 }
 

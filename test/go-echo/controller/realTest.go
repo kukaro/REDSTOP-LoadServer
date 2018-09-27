@@ -11,10 +11,12 @@ import (
 )
 
 type ApiRealTestData struct {
-	Method string `json:"method"`
-	Rtype  string `json:"rtype"`
-	Rurl   string `json:"rurl"`
-	Body   string `json:"body"`
+	Method     string      `json:"method"`
+	Rtype      string      `json:"rtype"`
+	Rurl       string      `json:"rurl"`
+	Body       string      `json:"body"`
+	Header     interface{} `json:"header"`
+	StatusCode int         `json:"status-code"`
 }
 
 func RealTest(c echo.Context) error {
@@ -27,6 +29,8 @@ func RealTest(c echo.Context) error {
 	//isComplete := make(chan bool)
 	//isComplete := make(chan bool)
 	body := make(chan string)
+	header := make(chan interface{})
+	statusCode := make(chan int)
 	go func() {
 		/*
 			test : http://localhost:1323/api/v1/api/real-test/get/http/localhost:3000%2fapi%2fjson-test%2fsingle-json%2f
@@ -34,9 +38,11 @@ func RealTest(c echo.Context) error {
 		resp, _ := http.Get(rtype + "://" + rurl)
 		data, _ := ioutil.ReadAll(resp.Body)
 		body <- string(data)
+		header <- resp.Header
+		statusCode <- resp.StatusCode
 	}()
 
-	apiRealTestData := ApiRealTestData{rurl, rtype, method, <-body}
+	apiRealTestData := ApiRealTestData{rurl, rtype, method, <-body, <-header, <-statusCode}
 	jsonData, _ := json.Marshal(apiRealTestData)
 
 	fmt.Println(string(jsonData))

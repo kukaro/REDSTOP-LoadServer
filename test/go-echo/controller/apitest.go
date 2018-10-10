@@ -51,7 +51,7 @@ func ApiTestOriginHandler(c echo.Context) error {
 	jsonData, _ := json.Marshal(map[string]interface{}{
 		"count":           cnt,
 		"sumResponseTime": strconv.Itoa(int((end-start)/1000)) + "us",
-		"avgResponseTime": strconv.Itoa((int(end-start)/cnt/1000)) + "us",
+		"avgResponseTime": strconv.Itoa((int(end-start) / cnt / 1000)) + "us",
 	})
 	return c.String(http.StatusOK, string(jsonData))
 }
